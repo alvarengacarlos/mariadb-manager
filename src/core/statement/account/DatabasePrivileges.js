@@ -19,13 +19,8 @@ class DatabasePrivileges {
 		this.#baseStatement = `ON ${databaseName} TO ${username}@${hostname};`;
 	}
 
-	addAllPrivilegesDatabasePermission() {
-		if (this.#privileges) {
-			this.#privileges += ", ALL PRIVILEGES";
-
-		} else {
-			this.#privileges += "ALL PRIVILEGES";
-		}        
+	addAllPrivilegesDatabasePermission() {		
+		this.#privileges += "ALL PRIVILEGES";		
         
 		return this;
 	}
@@ -107,7 +102,11 @@ class DatabasePrivileges {
 		return this;
 	}
 
-	builder() {
+	builder() {	
+		if (this.#privileges.includes("ALL PRIVILEGES") && this.#privileges.split(",").length >= 2) {
+			throw new Error("if ALL PRIVILEGES is set, then only it is allowed");
+		}
+
 		return `GRANT ${this.#privileges} ${this.#baseStatement}`;
 	}
 }

@@ -17,6 +17,15 @@ describe("core/statement/account/DatabasePrivileges.js", () => {
 		databasePrivileges = new DatabasePrivileges(username, host, databaseName);
 	});
     
+	it("given a username, host and database name when executed the grant method then it must throw error because ALL PRIVILEGES is set and another statement too", () => {
+		expect(() => { 
+			databasePrivileges
+				.addAllPrivilegesDatabasePermission()
+				.addCreateDatabasePermission()
+				.builder();
+		}).to.throw(Error);		
+	});
+	
 	it("given a username, host and database name when executed the grant method then it must create statement to grant ALL PRIVILEGES to the user", () => {
 		const statement = databasePrivileges
 			.addAllPrivilegesDatabasePermission()
