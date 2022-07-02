@@ -23,22 +23,22 @@ describe("core/statement/account/ColumnPrivileges.js", () => {
 			.addInsertColumnPermission("id", "name")
 			.builder();
         
-        expect(statement)
-            .to.eql(`GRANT INSERT (id,name) ON ${databaseName}.${tableName} TO ${username}@${host};`);
+		expect(statement)
+			.to.eql(`GRANT INSERT (id,name) ON ${databaseName}.${tableName} TO ${username}@${host};`);
         
-        expect(statement).to.be.string;
+		expect(statement).to.be.string;
 	});
 
-    it("given a username, host and database name when executed the grant method then it must create statement to grant INSERT, SELECT and UPDATE to the user", () => {
+	it("given a username, host and database name when executed the grant method then it must create statement to grant INSERT, SELECT and UPDATE to the user", () => {
 		const statement = columnPrivileges
 			.addInsertColumnPermission("id", "name")
-            .addSelectColumnPermission("id", "name", "age")
-            .addUpdateColumnPermission("id", "name")
+			.addSelectColumnPermission("id", "name", "age")
+			.addUpdateColumnPermission("id", "name")
 			.builder();
         
-        expect(statement)
-            .to.eql(`GRANT INSERT (id,name),SELECT (id,name,age),UPDATE (id,name) ON ${databaseName}.${tableName} TO ${username}@${host};`);
+		expect(statement)
+			.to.eql(`GRANT INSERT (id,name),SELECT (id,name,age),UPDATE (id,name) ON ${databaseName}.${tableName} TO ${username}@${host};`);
         
-        expect(statement).to.be.string;
+		expect(statement).to.be.string;
 	});
 });

@@ -1,6 +1,6 @@
 class ColumnPrivileges {
 
-    #privileges;
+	#privileges;
 	#baseStatement;
 
 	/**
@@ -20,8 +20,8 @@ class ColumnPrivileges {
 		this.#baseStatement = `ON ${databaseName}.${tableName} TO ${username}@${host};`;
 	}
 
-    addInsertColumnPermission(...columnList) {
-        if (this.#privileges) {
+	addInsertColumnPermission(...columnList) {
+		if (this.#privileges) {
 			this.#privileges += `,INSERT (${columnList.join(",")})`;
         
 		} else {
@@ -29,10 +29,10 @@ class ColumnPrivileges {
 		}
         
 		return this;
-    }
+	}
 
-    addSelectColumnPermission(...columnList) {
-        if (this.#privileges) {
+	addSelectColumnPermission(...columnList) {
+		if (this.#privileges) {
 			this.#privileges += `,SELECT (${columnList.join(",")})`;
         
 		} else {
@@ -40,10 +40,10 @@ class ColumnPrivileges {
 		}
         
 		return this;
-    }
+	}
 
-    addUpdateColumnPermission(...columnList) {
-        if (this.#privileges) {
+	addUpdateColumnPermission(...columnList) {
+		if (this.#privileges) {
 			this.#privileges += `,UPDATE (${columnList.join(",")})`;
         
 		} else {
@@ -51,9 +51,9 @@ class ColumnPrivileges {
 		}
         
 		return this;
-    }
+	}
 
-    builder() {	
+	builder() {	
 		return `GRANT ${this.#privileges} ${this.#baseStatement}`;
 	}
 
