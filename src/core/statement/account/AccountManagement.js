@@ -62,7 +62,6 @@ class AccountManagement {
 	revoke() {}
 	createRole() {}
 	dropRole() {}
-	showGrants() {}
 }
 
 module.exports = AccountManagement;
