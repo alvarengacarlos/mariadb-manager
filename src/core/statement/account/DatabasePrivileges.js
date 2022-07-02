@@ -6,17 +6,17 @@ class DatabasePrivileges {
 	/**
      * 
      * @param {String} username 
-     * @param {String} hostname 
+     * @param {String} host 
      * @param {String} databaseName 
      * @returns {String}
      */    
-	constructor(username, hostname, databaseName) {
-		if (!username || !hostname || !databaseName) {
-			throw new Error("username, hostname and databaseName cannot be empty");
+	constructor(username, host, databaseName) {
+		if (!username || !host || !databaseName) {
+			throw new Error("username, host and databaseName cannot be empty");
 		}
 
 		this.#privileges = "";
-		this.#baseStatement = `ON ${databaseName} TO ${username}@${hostname};`;
+		this.#baseStatement = `ON ${databaseName} TO ${username}@${host};`;
 	}
 
 	addAllPrivilegesDatabasePermission() {		
