@@ -16,7 +16,7 @@ class DatabasePrivileges {
 		}
 
 		this.#privileges = "";
-		this.#baseStatement = `ON ${databaseName}.* TO ${username}@${hostname};`;
+		this.#baseStatement = `ON ${databaseName} TO ${username}@${hostname};`;
 	}
 
 	addAllPrivilegesDatabasePermission() {

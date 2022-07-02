@@ -23,7 +23,7 @@ describe("core/statement/account/DatabasePrivileges.js", () => {
 			.builder();
 
 		expect(statement)
-			.to.eql(`GRANT ALL PRIVILEGES ON ${databaseName}.* TO ${username}@${host};`);
+			.to.eql(`GRANT ALL PRIVILEGES ON ${databaseName} TO ${username}@${host};`);
         
 		expect(statement).to.be.string;
 	});
@@ -34,7 +34,7 @@ describe("core/statement/account/DatabasePrivileges.js", () => {
 			.builder();
 
 		expect(statement)
-			.to.eql(`GRANT CREATE ON ${databaseName}.* TO ${username}@${host};`);
+			.to.eql(`GRANT CREATE ON ${databaseName} TO ${username}@${host};`);
         
 		expect(statement).to.be.string;
 	});
@@ -51,7 +51,7 @@ describe("core/statement/account/DatabasePrivileges.js", () => {
 			.builder();
 
 		expect(statement)
-			.to.eql(`GRANT CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,DROP,EVENT,GRANT OPTION,LOCK TABLES ON ${databaseName}.* TO ${username}@${host};`);
+			.to.eql(`GRANT CREATE,CREATE ROUTINE,CREATE TEMPORARY TABLES,DROP,EVENT,GRANT OPTION,LOCK TABLES ON ${databaseName} TO ${username}@${host};`);
         
 		expect(statement).to.be.string;
 	});
