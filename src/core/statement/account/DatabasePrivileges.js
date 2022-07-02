@@ -8,7 +8,6 @@ class DatabasePrivileges {
      * @param {String} username 
      * @param {String} hostname 
      * @param {String} databaseName 
-     * @param {String} tableName 
      * @returns {String}
      */    
     constructor(username, hostname, databaseName) {
