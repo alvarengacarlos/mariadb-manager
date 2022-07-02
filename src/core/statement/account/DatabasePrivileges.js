@@ -1,115 +1,115 @@
 class DatabasePrivileges {
 
-    #privileges;
-    #baseStatement;
+	#privileges;
+	#baseStatement;
 
-    /**
+	/**
      * 
      * @param {String} username 
      * @param {String} hostname 
      * @param {String} databaseName 
      * @returns {String}
      */    
-    constructor(username, hostname, databaseName) {
-        if (!username || !hostname || !databaseName) {
-            throw new Error("username, hostname and databaseName cannot be empty");
-        }
+	constructor(username, hostname, databaseName) {
+		if (!username || !hostname || !databaseName) {
+			throw new Error("username, hostname and databaseName cannot be empty");
+		}
 
-        this.#privileges = "";
-        this.#baseStatement = `ON ${databaseName}.* TO ${username}@${hostname};`
-    }
+		this.#privileges = "";
+		this.#baseStatement = `ON ${databaseName}.* TO ${username}@${hostname};`;
+	}
 
-    addAllPrivilegesDatabasePermission() {
-        if (this.#privileges) {
-            this.#privileges += ", ALL PRIVILEGES";
+	addAllPrivilegesDatabasePermission() {
+		if (this.#privileges) {
+			this.#privileges += ", ALL PRIVILEGES";
 
-        } else {
-            this.#privileges += "ALL PRIVILEGES";
-        }        
+		} else {
+			this.#privileges += "ALL PRIVILEGES";
+		}        
         
-        return this;
-    }
+		return this;
+	}
 
-    addCreateDatabasePermission() {
-        if (this.#privileges) {            
-            this.#privileges += ",CREATE";    
+	addCreateDatabasePermission() {
+		if (this.#privileges) {            
+			this.#privileges += ",CREATE";    
 
-        } else {
-            this.#privileges += "CREATE";
-        }
+		} else {
+			this.#privileges += "CREATE";
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    addCreateRoutinePermission() {
-        if (this.#privileges) {
-            this.#privileges += ",CREATE ROUTINE";
+	addCreateRoutinePermission() {
+		if (this.#privileges) {
+			this.#privileges += ",CREATE ROUTINE";
 
-        } else {
-            this.#privileges += "CREATE ROUTINE";
-        }
+		} else {
+			this.#privileges += "CREATE ROUTINE";
+		}
         
-        return this;
-    }
+		return this;
+	}
 
-    addCreateTemporaryTablesPermission() {
-        if (this.#privileges) {
-            this.#privileges += ",CREATE TEMPORARY TABLES";
+	addCreateTemporaryTablesPermission() {
+		if (this.#privileges) {
+			this.#privileges += ",CREATE TEMPORARY TABLES";
 
-        } else {
-            this.#privileges += "CREATE TEMPORARY TABLES";
-        }
+		} else {
+			this.#privileges += "CREATE TEMPORARY TABLES";
+		}
         
-        return this;        
-    }
+		return this;        
+	}
 
-    addDropDatabasePermission() {
-        if (this.#privileges) {
-            this.#privileges += ",DROP";
+	addDropDatabasePermission() {
+		if (this.#privileges) {
+			this.#privileges += ",DROP";
 
-        } else {
-            this.#privileges += "DROP";
-        }
+		} else {
+			this.#privileges += "DROP";
+		}
         
-        return this;
-    }
+		return this;
+	}
 
-    addEventManagerPermission() {
-        if (this.#privileges) {
-            this.#privileges += ",EVENT";
+	addEventManagerPermission() {
+		if (this.#privileges) {
+			this.#privileges += ",EVENT";
 
-        } else {
-            this.#privileges += "EVENT";
-        }
+		} else {
+			this.#privileges += "EVENT";
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    addGrantOptionPermission() {
-        if (this.#privileges) {
-            this.#privileges += ",GRANT OPTION";
+	addGrantOptionPermission() {
+		if (this.#privileges) {
+			this.#privileges += ",GRANT OPTION";
         
-        } else {
-            this.#privileges += "GRANT OPTION";
-        }
+		} else {
+			this.#privileges += "GRANT OPTION";
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    addLockTablesPermission() {
-        if (this.#privileges) {
-            this.#privileges += ",LOCK TABLES";
+	addLockTablesPermission() {
+		if (this.#privileges) {
+			this.#privileges += ",LOCK TABLES";
         
-        } else {
-            this.#privileges += "LOCK TABLES";
-        }
+		} else {
+			this.#privileges += "LOCK TABLES";
+		}
         
-        return this;
-    }
+		return this;
+	}
 
-    builder() {
-        return `GRANT ${this.#privileges} ${this.#baseStatement}`;
-    }
+	builder() {
+		return `GRANT ${this.#privileges} ${this.#baseStatement}`;
+	}
 }
 
 module.exports = DatabasePrivileges;
