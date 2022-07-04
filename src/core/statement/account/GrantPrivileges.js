@@ -1,4 +1,4 @@
-class TablePrivileges {
+class GrantPrivileges {
     
 	#privileges;
 	#baseStatement;
@@ -11,22 +11,35 @@ class TablePrivileges {
      * @param {String} tableName 
      * @returns {String}
      */    
-	constructor(username, host, databaseName, tableName = "*") {
+	constructor(username, host, databaseName, tableName) {
 		if (!username || !host || !databaseName) {
 			throw new Error("username, host and databaseName cannot be empty");
+		}
+
+		if (!tableName) {
+			tableName = "*";
 		}
 
 		this.#privileges = "";
 		this.#baseStatement = `ON ${databaseName}.${tableName} TO ${username}@${host};`;
 	}
 
-	addAllPrivilegesTablePermission() {		
-		this.#privileges += "ALL PRIVILEGES";
+	/**
+	 * DDL (Data Definition Language) permissions
+	 * DCL (Data Control Language) permissions
+	 */
+	addCreatePermission() {
+		if (this.#privileges) {            
+			this.#privileges += ",CREATE";    
+
+		} else {
+			this.#privileges += "CREATE";
+		}
 
 		return this;
 	}
 
-	addAlterTablePermission() {
+	addAlterPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",ALTER";
 
@@ -37,18 +50,7 @@ class TablePrivileges {
 		return this;
 	}
 
-	addCreateTablePermission() {
-		if (this.#privileges) {
-			this.#privileges += ",CREATE";
-
-		} else {
-			this.#privileges += "CREATE";
-		}        
-        
-		return this;
-	}
-
-	addCreateViewTablePermission() {
+	addCreateViewPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",CREATE VIEW";
 
@@ -59,29 +61,7 @@ class TablePrivileges {
 		return this;
 	}
 
-	addDeleteTablePermission() {
-		if (this.#privileges) {
-			this.#privileges += ",DELETE";
-
-		} else {
-			this.#privileges += "DELETE";
-		}        
-        
-		return this;
-	}
-
-	addDeleteHistoryTablePermission() {
-		if (this.#privileges) {
-			this.#privileges += ",DELETE HISTORY";
-
-		} else {
-			this.#privileges += "DELETE HISTORY";
-		}        
-        
-		return this;
-	}
-
-	addDropTablePermission() {
+	addDropPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",DROP";
 
@@ -92,7 +72,18 @@ class TablePrivileges {
 		return this;
 	}
 
-	addGrantOptionTablePermission() {
+	addDeleteHistoryPermission() {
+		if (this.#privileges) {
+			this.#privileges += ",DELETE HISTORY";
+
+		} else {
+			this.#privileges += "DELETE HISTORY";
+		}        
+        
+		return this;
+	}
+
+	addGrantOptionPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",GRANT OPTION";
 
@@ -103,7 +94,7 @@ class TablePrivileges {
 		return this;
 	}
 
-	addIndexTablePermission() {
+	addIndexPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",INDEX";
 
@@ -114,29 +105,7 @@ class TablePrivileges {
 		return this;
 	}
 
-	addInsertTablePermission() {
-		if (this.#privileges) {
-			this.#privileges += ",INSERT";
-
-		} else {
-			this.#privileges += "INSERT";
-		}        
-        
-		return this;
-	}
-
-	addSelectTablePermission() {
-		if (this.#privileges) {
-			this.#privileges += ",SELECT";
-
-		} else {
-			this.#privileges += "SELECT";
-		}        
-        
-		return this;
-	}
-
-	addShowViewTablePermission() {
+	addShowViewPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",SHOW VIEW";
 
@@ -147,7 +116,7 @@ class TablePrivileges {
 		return this;
 	}
 
-	addTriggerTablePermission() {
+	addTriggerPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",TRIGGER";
 
@@ -157,8 +126,45 @@ class TablePrivileges {
         
 		return this;
 	}
+	
+	/**
+	 * DQL (Data Query Language) permissions
+	 * DML (Data Manipulation Language) permissions
+	 */
+	addDeletePermission() {
+		if (this.#privileges) {
+			this.#privileges += ",DELETE";
 
-	addUpdateTablePermission() {
+		} else {
+			this.#privileges += "DELETE";
+		}        
+        
+		return this;
+	}
+
+	addInsertPermission() {
+		if (this.#privileges) {
+			this.#privileges += ",INSERT";
+
+		} else {
+			this.#privileges += "INSERT";
+		}        
+        
+		return this;
+	}
+
+	addSelectPermission() {
+		if (this.#privileges) {
+			this.#privileges += ",SELECT";
+
+		} else {
+			this.#privileges += "SELECT";
+		}        
+        
+		return this;
+	}
+
+	addUpdatePermission() {
 		if (this.#privileges) {
 			this.#privileges += ",UPDATE";
 
@@ -170,13 +176,9 @@ class TablePrivileges {
 	}
 
 	builder() {
-		if (this.#privileges.includes("ALL PRIVILEGES") && this.#privileges.split(",").length >= 2) {
-			throw new Error("if ALL PRIVILEGES is set, then only it is allowed");
-		}
-
 		return `GRANT ${this.#privileges} ${this.#baseStatement}`;
 	}
 
 }
 
-module.exports = TablePrivileges;
+module.exports = GrantPrivileges;
