@@ -16,14 +16,14 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 	describe("constructor", () => {
 	
 		it("given username, host, database name and no table name when creating the instance then the tableName property must receive an asterisk", () => {
-			const tablePrivileges1 = new GrantPrivileges(username, host, databaseName, null);
-			const statement1 = tablePrivileges1.builder();
+			const grantPrivileges1 = new GrantPrivileges(username, host, databaseName, null);
+			const statement1 = grantPrivileges1.builder();
 			
-			const tablePrivileges2 = new GrantPrivileges(username, host, databaseName, undefined);
-			const statement2 = tablePrivileges2.builder();
+			const grantPrivileges2 = new GrantPrivileges(username, host, databaseName, undefined);
+			const statement2 = grantPrivileges2.builder();
 	
-			const tablePrivileges3 = new GrantPrivileges(username, host, databaseName);
-			const statement3 = tablePrivileges3.builder();
+			const grantPrivileges3 = new GrantPrivileges(username, host, databaseName);
+			const statement3 = grantPrivileges3.builder();
 			
 			expect(statement1).to.include("*");			
 			expect(statement2).to.include("*");			
@@ -35,8 +35,8 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 		});
 
 		it("given username, host, database name and table name when creating the instance then the tableName property must receive the table name", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
-			const statement = tablePrivileges.builder();
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+			const statement = grantPrivileges.builder();
 			
 			expect(statement).to.include(tableName);
 			expect(statement).to.be.string;
@@ -44,24 +44,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 		
 	});
 	
-	describe("addCreatePermission", () => {
+	describe("addGrantCreatePermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addCreateDatabasePermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantCreateDatabasePermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addCreatePermission()
+			const statement = grantPrivileges
+				.addGrantCreatePermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT CREATE ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addCreateDatabasePermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantCreateDatabasePermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addCreatePermission()
+			const statement = grantPrivileges
+				.addGrantCreatePermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT CREATE ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -70,24 +70,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 		
 	});
 	
-	describe("addAlterPermission", () => {
+	describe("addGrantAlterPermission", () => {
 
-		it("given username, host, database name and no table name when executing the addAlterPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantAlterPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addAlterPermission()
+			const statement = grantPrivileges
+				.addGrantAlterPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT ALTER ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addAlterPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantAlterPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addAlterPermission()
+			const statement = grantPrivileges
+				.addGrantAlterPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT ALTER ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -96,24 +96,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 	
-	describe("addCreateViewPermission", () => {
+	describe("addGrantCreateViewPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addCreateViewPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantCreateViewPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addCreateViewPermission()
+			const statement = grantPrivileges
+				.addGrantCreateViewPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT CREATE VIEW ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addCreateViewPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantCreateViewPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addCreateViewPermission()
+			const statement = grantPrivileges
+				.addGrantCreateViewPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT CREATE VIEW ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -122,24 +122,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addDropPermission", () => {
+	describe("addGrantDropPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addDropPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantDropPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addDropPermission()
+			const statement = grantPrivileges
+				.addGrantDropPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT DROP ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addDropPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantDropPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addDropPermission()
+			const statement = grantPrivileges
+				.addGrantDropPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT DROP ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -148,24 +148,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addDeleteHistoryPermission", () => {
+	describe("addGrantDeleteHistoryPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addDeleteHistoryPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantDeleteHistoryPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addDeleteHistoryPermission()
+			const statement = grantPrivileges
+				.addGrantDeleteHistoryPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT DELETE HISTORY ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addDeleteHistoryPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantDeleteHistoryPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addDeleteHistoryPermission()
+			const statement = grantPrivileges
+				.addGrantDeleteHistoryPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT DELETE HISTORY ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -174,24 +174,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addGrantOptionPermission", () => {
+	describe("addGrantGrantOptionPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addDeleteHistoryPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantDeleteHistoryPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addGrantOptionPermission()
+			const statement = grantPrivileges
+				.addGrantGrantOptionPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT GRANT OPTION ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addGrantOptionPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantGrantOptionPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addGrantOptionPermission()
+			const statement = grantPrivileges
+				.addGrantGrantOptionPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT GRANT OPTION ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -200,24 +200,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addIndexPermission", () => {
+	describe("addGrantIndexPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addIndexPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantIndexPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addIndexPermission()
+			const statement = grantPrivileges
+				.addGrantIndexPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT INDEX ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addIndexPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantIndexPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addIndexPermission()
+			const statement = grantPrivileges
+				.addGrantIndexPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT INDEX ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -226,24 +226,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addShowViewPermission", () => {
+	describe("addGrantShowViewPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addShowViewPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantShowViewPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addShowViewPermission()
+			const statement = grantPrivileges
+				.addGrantShowViewPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT SHOW VIEW ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addShowViewPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantShowViewPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addShowViewPermission()
+			const statement = grantPrivileges
+				.addGrantShowViewPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT SHOW VIEW ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -252,24 +252,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addTriggerPermission", () => {
+	describe("addGrantTriggerPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addTriggerPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantTriggerPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addTriggerPermission()
+			const statement = grantPrivileges
+				.addGrantTriggerPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT TRIGGER ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addTriggerPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantTriggerPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addTriggerPermission()
+			const statement = grantPrivileges
+				.addGrantTriggerPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT TRIGGER ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -278,24 +278,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addDeletePermission", () => {
+	describe("addGrantDeletePermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addDeletePermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantDeletePermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addDeletePermission()
+			const statement = grantPrivileges
+				.addGrantDeletePermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT DELETE ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addDeletePermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantDeletePermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addDeletePermission()
+			const statement = grantPrivileges
+				.addGrantDeletePermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT DELETE ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -304,24 +304,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addInsertPermission", () => {
+	describe("addGrantInsertPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addInsertPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantInsertPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addInsertPermission()
+			const statement = grantPrivileges
+				.addGrantInsertPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT INSERT ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addInsertPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantInsertPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addInsertPermission()
+			const statement = grantPrivileges
+				.addGrantInsertPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT INSERT ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -330,24 +330,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addSelectPermission", () => {
+	describe("addGrantSelectPermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addSelectPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantSelectPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addSelectPermission()
+			const statement = grantPrivileges
+				.addGrantSelectPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT SELECT ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addSelectPermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantSelectPermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addSelectPermission()
+			const statement = grantPrivileges
+				.addGrantSelectPermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT SELECT ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -356,24 +356,24 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 
 	});
 
-	describe("addUpdatePermission", () => {
+	describe("addGrantUpdatePermission", () => {
 		
-		it("given username, host, database name and no table name when executing the addUpdatePermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+		it("given username, host, database name and no table name when executing the addGrantUpdatePermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 	
-			const statement = tablePrivileges
-				.addUpdatePermission()
+			const statement = grantPrivileges
+				.addGrantUpdatePermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT UPDATE ON ${databaseName}.* TO ${username}@${host};`);
 			expect(statement).to.be.string;
 		});
 
-		it("given username, host, database name and table name when executing the addUpdatePermission method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+		it("given username, host, database name and table name when executing the addGrantUpdatePermission method then it must create a correct statement", () => {
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 	
-			const statement = tablePrivileges
-				.addUpdatePermission()
+			const statement = grantPrivileges
+				.addGrantUpdatePermission()
 				.builder();
 	
 			expect(statement).to.eql(`GRANT UPDATE ON ${databaseName}.${tableName} TO ${username}@${host};`);
@@ -385,22 +385,22 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 	describe("all chain methods", () => {
 		
 		it("given a username, host, database name and no table name when executing all methods then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, null);
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, null);
 
-			const statement = tablePrivileges
-				.addCreatePermission()
-				.addAlterPermission()
-				.addCreateViewPermission()
-				.addDropPermission()
-				.addDeleteHistoryPermission()
-				.addGrantOptionPermission()
-				.addIndexPermission()
-				.addShowViewPermission()
-				.addTriggerPermission()
-				.addDeletePermission()
-				.addInsertPermission()
-				.addSelectPermission()
-				.addUpdatePermission()
+			const statement = grantPrivileges
+				.addGrantCreatePermission()
+				.addGrantAlterPermission()
+				.addGrantCreateViewPermission()
+				.addGrantDropPermission()
+				.addGrantDeleteHistoryPermission()
+				.addGrantGrantOptionPermission()
+				.addGrantIndexPermission()
+				.addGrantShowViewPermission()
+				.addGrantTriggerPermission()
+				.addGrantDeletePermission()
+				.addGrantInsertPermission()
+				.addGrantSelectPermission()
+				.addGrantUpdatePermission()
 				.builder();
 	
 			expect(statement)
@@ -410,22 +410,22 @@ describe("core/statement/account/GrantPrivileges.js", () => {
 		});
 
 		it("given a username, host, database name and table name when executed the grant method then it must create a correct statement", () => {
-			const tablePrivileges = new GrantPrivileges(username, host, databaseName, tableName);
+			const grantPrivileges = new GrantPrivileges(username, host, databaseName, tableName);
 
-			const statement = tablePrivileges
-				.addCreatePermission()
-				.addAlterPermission()
-				.addCreateViewPermission()
-				.addDropPermission()
-				.addDeleteHistoryPermission()
-				.addGrantOptionPermission()
-				.addIndexPermission()
-				.addShowViewPermission()
-				.addTriggerPermission()
-				.addDeletePermission()
-				.addInsertPermission()
-				.addSelectPermission()
-				.addUpdatePermission()
+			const statement = grantPrivileges
+				.addGrantCreatePermission()
+				.addGrantAlterPermission()
+				.addGrantCreateViewPermission()
+				.addGrantDropPermission()
+				.addGrantDeleteHistoryPermission()
+				.addGrantGrantOptionPermission()
+				.addGrantIndexPermission()
+				.addGrantShowViewPermission()
+				.addGrantTriggerPermission()
+				.addGrantDeletePermission()
+				.addGrantInsertPermission()
+				.addGrantSelectPermission()
+				.addGrantUpdatePermission()
 				.builder();
 	
 			expect(statement)

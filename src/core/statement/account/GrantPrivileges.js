@@ -28,7 +28,7 @@ class GrantPrivileges {
 	 * DDL (Data Definition Language) permissions
 	 * DCL (Data Control Language) permissions
 	 */
-	addCreatePermission() {
+	addGrantCreatePermission() {
 		if (this.#privileges) {            
 			this.#privileges += ",CREATE";    
 
@@ -39,7 +39,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addAlterPermission() {
+	addGrantAlterPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",ALTER";
 
@@ -50,7 +50,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addCreateViewPermission() {
+	addGrantCreateViewPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",CREATE VIEW";
 
@@ -61,7 +61,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addDropPermission() {
+	addGrantDropPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",DROP";
 
@@ -72,7 +72,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addDeleteHistoryPermission() {
+	addGrantDeleteHistoryPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",DELETE HISTORY";
 
@@ -83,7 +83,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addGrantOptionPermission() {
+	addGrantGrantOptionPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",GRANT OPTION";
 
@@ -94,7 +94,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addIndexPermission() {
+	addGrantIndexPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",INDEX";
 
@@ -105,7 +105,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addShowViewPermission() {
+	addGrantShowViewPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",SHOW VIEW";
 
@@ -116,7 +116,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addTriggerPermission() {
+	addGrantTriggerPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",TRIGGER";
 
@@ -131,7 +131,7 @@ class GrantPrivileges {
 	 * DQL (Data Query Language) permissions
 	 * DML (Data Manipulation Language) permissions
 	 */
-	addDeletePermission() {
+	addGrantDeletePermission() {
 		if (this.#privileges) {
 			this.#privileges += ",DELETE";
 
@@ -142,7 +142,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addInsertPermission() {
+	addGrantInsertPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",INSERT";
 
@@ -153,7 +153,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addSelectPermission() {
+	addGrantSelectPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",SELECT";
 
@@ -164,7 +164,7 @@ class GrantPrivileges {
 		return this;
 	}
 
-	addUpdatePermission() {
+	addGrantUpdatePermission() {
 		if (this.#privileges) {
 			this.#privileges += ",UPDATE";
 
