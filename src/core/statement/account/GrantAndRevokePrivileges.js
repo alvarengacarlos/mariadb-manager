@@ -1,14 +1,17 @@
-class RevokePrivileges {
-
-    #privileges;
-	#baseStatement;
+class GrantAndRevokePrivileges {
+    
+	#privileges;
+	#username;
+	#host;
+	#databaseName;
+	#tableName;	
 
 	/**
      * 
      * @param {String} username 
      * @param {String} host 
      * @param {String} databaseName 
-     * @param {String} tableName
+     * @param {String} tableName 
      * @returns {String}
      */    
 	constructor(username, host, databaseName, tableName) {
@@ -16,19 +19,24 @@ class RevokePrivileges {
 			throw new Error("username, host and databaseName cannot be empty");
 		}
 
-        if (!tableName) {
+		if (!tableName) {
 			tableName = "*";
 		}
 
 		this.#privileges = "";
-		this.#baseStatement = `ON ${databaseName}.${tableName} FROM ${username}@${host};`;
+		this.#username = username;
+		this.#host = host;
+		this.#databaseName = databaseName;
+		this.#tableName = tableName;
+
+		
 	}
 
-    /**
+	/**
 	 * DDL (Data Definition Language) permissions
 	 * DCL (Data Control Language) permissions
 	 */
-    addRevokeCreatePermission() {
+	addCreatePermission() {
 		if (this.#privileges) {            
 			this.#privileges += ",CREATE";    
 
@@ -39,7 +47,7 @@ class RevokePrivileges {
 		return this;
 	}
 
-	addRevokeAlterPermission() {
+	addAlterPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",ALTER";
 
@@ -50,7 +58,7 @@ class RevokePrivileges {
 		return this;
 	}
 
-    addRevokeCreateViewPermission() {
+	addCreateViewPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",CREATE VIEW";
 
@@ -61,18 +69,18 @@ class RevokePrivileges {
 		return this;
 	}
 
-    addRevokeDropPermission() {
+	addDropPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",DROP";
 
 		} else {
 			this.#privileges += "DROP";
-		}
+		}        
         
 		return this;
 	}
 
-	addRevokeDeleteHistoryPermission() {
+	addDeleteHistoryPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",DELETE HISTORY";
 
@@ -83,18 +91,18 @@ class RevokePrivileges {
 		return this;
 	}
 
-	addRevokeGrantOptionPermission() {
+	addGrantOptionPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",GRANT OPTION";
-        
+
 		} else {
 			this.#privileges += "GRANT OPTION";
-		}
-
+		}        
+        
 		return this;
 	}
-    
-	addRevokeIndexPermission() {
+
+	addIndexPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",INDEX";
 
@@ -105,7 +113,7 @@ class RevokePrivileges {
 		return this;
 	}
 
-    addRevokeShowViewPermission() {
+	addShowViewPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",SHOW VIEW";
 
@@ -116,7 +124,7 @@ class RevokePrivileges {
 		return this;
 	}
 
-	addRevokeTriggerPermission() {
+	addTriggerPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",TRIGGER";
 
@@ -126,12 +134,12 @@ class RevokePrivileges {
         
 		return this;
 	}
-
-    /**
+	
+	/**
 	 * DQL (Data Query Language) permissions
 	 * DML (Data Manipulation Language) permissions
 	 */
-	addRevokeDeletePermission() {
+	addDeletePermission() {
 		if (this.#privileges) {
 			this.#privileges += ",DELETE";
 
@@ -142,7 +150,7 @@ class RevokePrivileges {
 		return this;
 	}
 
-	addRevokeInsertPermission() {
+	addInsertPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",INSERT";
 
@@ -153,7 +161,7 @@ class RevokePrivileges {
 		return this;
 	}
 
-	addRevokeSelectPermission() {
+	addSelectPermission() {
 		if (this.#privileges) {
 			this.#privileges += ",SELECT";
 
@@ -164,7 +172,7 @@ class RevokePrivileges {
 		return this;
 	}
 
-	addRevokeUpdatePermission() {
+	addUpdatePermission() {
 		if (this.#privileges) {
 			this.#privileges += ",UPDATE";
 
@@ -175,10 +183,14 @@ class RevokePrivileges {
 		return this;
 	}
 
-    builder() {	
-		return `REVOKE ${this.#privileges} ${this.#baseStatement}`;
+	buildGrantStatement() {		
+		return `GRANT ${this.#privileges} ON ${this.#databaseName}.${this.#tableName} TO ${this.#username}@${this.#host};`;
+	}
+
+	buildRevokeStatement() {
+		return `REVOKE ${this.#privileges} ON ${this.#databaseName}.${this.#tableName} FROM ${this.#username}@${this.#host};`;
 	}
 
 }
 
-module.exports = RevokePrivileges;
+module.exports = GrantAndRevokePrivileges;
