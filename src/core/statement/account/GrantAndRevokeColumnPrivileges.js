@@ -1,7 +1,10 @@
 class ColumnPrivileges {
 
-	#privileges;
-	#baseStatement;
+	#privileges;			
+	#username;
+	#databaseName;	
+	#tableName
+	#host;
 
 	/**
      * 
@@ -17,15 +20,18 @@ class ColumnPrivileges {
 		}
 
 		this.#privileges = "";
-		this.#baseStatement = `ON ${databaseName}.${tableName} TO ${username}@${host};`;
+		this.#username = username;
+		this.#databaseName = databaseName;
+		this.#tableName = tableName;
+		this.#host = host;
 	}
 
 	addInsertColumnPermission(...columnList) {
 		if (this.#privileges) {
-			this.#privileges += `,INSERT (${columnList.join(",")})`;
+			this.#privileges += `,INSERT(${columnList.join(",")})`;
         
 		} else {
-			this.#privileges += `INSERT (${columnList.join(",")})`;
+			this.#privileges += `INSERT(${columnList.join(",")})`;
 		}
         
 		return this;
@@ -33,10 +39,10 @@ class ColumnPrivileges {
 
 	addSelectColumnPermission(...columnList) {
 		if (this.#privileges) {
-			this.#privileges += `,SELECT (${columnList.join(",")})`;
+			this.#privileges += `,SELECT(${columnList.join(",")})`;
         
 		} else {
-			this.#privileges += `SELECT (${columnList.join(",")})`;
+			this.#privileges += `SELECT(${columnList.join(",")})`;
 		}
         
 		return this;
@@ -44,17 +50,21 @@ class ColumnPrivileges {
 
 	addUpdateColumnPermission(...columnList) {
 		if (this.#privileges) {
-			this.#privileges += `,UPDATE (${columnList.join(",")})`;
+			this.#privileges += `,UPDATE(${columnList.join(",")})`;
         
 		} else {
-			this.#privileges += `UPDATE (${columnList.join(",")})`;
+			this.#privileges += `UPDATE(${columnList.join(",")})`;
 		}
         
 		return this;
 	}
 
-	builder() {	
-		return `GRANT ${this.#privileges} ${this.#baseStatement}`;
+	builderGrantStatement() {			
+		return `GRANT ${this.#privileges} ON ${this.#databaseName}.${this.#tableName} TO ${this.#username}@${this.#host};`;
+	}
+
+	builderRevokeStatement() {		
+		return `REVOKE ${this.#privileges} ON ${this.#databaseName}.${this.#tableName} FROM ${this.#username}@${this.#host};`;
 	}
 
 }
