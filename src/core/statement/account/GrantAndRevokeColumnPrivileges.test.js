@@ -1,4 +1,4 @@
-const { it, describe, beforeEach, before } = require("mocha");
+const { it, describe, before } = require("mocha");
 const expect = require("chai").expect;
 
 const GrantAndRevokeColumnPrivileges = require("./GrantAndRevokeColumnPrivileges");

@@ -3,7 +3,7 @@ class ColumnPrivileges {
 	#privileges;			
 	#username;
 	#databaseName;	
-	#tableName
+	#tableName;
 	#host;
 
 	/**
