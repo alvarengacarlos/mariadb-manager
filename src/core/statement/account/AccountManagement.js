@@ -58,8 +58,7 @@ class AccountManagement {
 
 		return `RENAME USER ${oldUsername}@${oldHost} TO ${newUsername}@${newHost};`;
 	}
-
-	revoke() {}
+	
 	createRole() {}
 	dropRole() {}
 }
