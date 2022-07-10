@@ -16,7 +16,7 @@ describe("Account.js", () => {
 	beforeEach(() => {
 		account = new Account();
 	});
-    describe("createUser", () => {
+	describe("createUser", () => {
 
 		it("given a username, a password and a host when executed the createUser method then it must create statement to create user", () => {
 			const statement = account.createUser(username, password, host);
@@ -71,6 +71,6 @@ describe("Account.js", () => {
 			expect(statement).to.be.string;
 		});
 
-	})
+	});
 
 });

@@ -17,10 +17,10 @@ class Role {
 		}
 		
 		if (adminUserOfRole && roleAdminUserHost) {
-			return `CREATE ROLE IF NOT EXISTS ${roleName} WITH ADMIN ${adminUserOfRole}@${roleAdminUserHost};`
+			return `CREATE ROLE IF NOT EXISTS ${roleName} WITH ADMIN ${adminUserOfRole}@${roleAdminUserHost};`;
 		}
 
-		return `CREATE ROLE IF NOT EXISTS ${roleName};`
+		return `CREATE ROLE IF NOT EXISTS ${roleName};`;
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Role {
      * @param {String} tableName
      * @returns {String}
      */    
-    grantRole(username, host, roleName) {			
+	grantRole(username, host, roleName) {			
 		if (!username || !host || !roleName) {
 			throw new Error("username, host and roleName cannot be empty");
 		}
@@ -60,7 +60,7 @@ class Role {
      * @param {String} tableName
      * @returns {String}
      */    
-    revokeRole(username, host, roleName) {	
+	revokeRole(username, host, roleName) {	
 		if (!username || !host || !roleName) {
 			throw new Error("username, host and roleName cannot be empty");
 		}

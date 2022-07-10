@@ -9,7 +9,7 @@ describe("Role.js", () => {
 	before(() => {
 		username = "myusername";
 		host = "localhost";
-		roleName = "developer"
+		roleName = "developer";
 		
 	});
 
@@ -63,7 +63,7 @@ describe("Role.js", () => {
 			expect(statement).to.be.string;
 		});
 
-    });
+	});
 
 	describe("revokeRole", () => {
 		
@@ -78,6 +78,6 @@ describe("Role.js", () => {
 			expect(statement).to.be.string;
 		});
 
-    });
+	});
 
 });

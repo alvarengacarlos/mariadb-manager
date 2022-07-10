@@ -26,6 +26,11 @@ class ColumnPrivileges {
 		this.#host = host;
 	}
 
+	/**
+	 * 
+	 * @param  {...String} columnList 
+	 * @returns {String}
+	 */
 	addInsertColumnPermission(...columnList) {
 		if (this.#privileges) {
 			this.#privileges += `,INSERT(${columnList.join(",")})`;
@@ -37,6 +42,11 @@ class ColumnPrivileges {
 		return this;
 	}
 
+	/**
+	 * 
+	 * @param  {...String} columnList 
+	 * @returns {String}
+	 */
 	addSelectColumnPermission(...columnList) {
 		if (this.#privileges) {
 			this.#privileges += `,SELECT(${columnList.join(",")})`;
@@ -48,6 +58,11 @@ class ColumnPrivileges {
 		return this;
 	}
 
+	/**
+	 * 
+	 * @param  {...String} columnList 
+	 * @returns {String}
+	 */
 	addUpdateColumnPermission(...columnList) {
 		if (this.#privileges) {
 			this.#privileges += `,UPDATE(${columnList.join(",")})`;
