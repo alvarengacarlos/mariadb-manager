@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const GeneralCommands = require("./GeneralCommands");
 
-describe("core/statement/account/GeneralCommands.js", () => {
+describe("GeneralCommands.js", () => {
 
 	let username, host, databaseName;
 	before(() => {

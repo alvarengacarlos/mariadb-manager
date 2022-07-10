@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const GrantAndRevokeColumnPrivileges = require("./GrantAndRevokeColumnPrivileges");
 
-describe("core/statement/account/ColumnPrivileges.js", () => {
+describe("ColumnPrivileges.js", () => {
 
 	let username, host, databaseName, tableName;
 	before(() => {

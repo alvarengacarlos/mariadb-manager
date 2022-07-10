@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const AccountManagement = require("./AccountManagement");
 
-describe("core/statement/account/AccountManagement.js", () => {
+describe("AccountManagement.js", () => {
 
 	let username, password, host;
 	before(() => {
