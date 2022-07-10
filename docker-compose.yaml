@@ -1,4 +1,9 @@
 version: '3.9'
+
+networks: 
+  my-network:
+    driver: bridge
+
 services:
   app:    
     image: node:lts-buster    
@@ -12,3 +17,17 @@ services:
       - ABSOLUTE_PATH_IN_CONTAINER=${ABSOLUTE_PATH_IN_CONTAINER}
     volumes:
       - "./:${ABSOLUTE_PATH_IN_CONTAINER}"
+    networks:
+      - my-network
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    container_name: maria
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    networks:
+      - my-network
