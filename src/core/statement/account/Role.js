@@ -44,7 +44,7 @@ class Role {
      * @param {String} tableName
      * @returns {String}
      */    
-	grantRole(username, host, roleName) {			
+	addRoleToUser(username, host, roleName) {			
 		if (!username || !host || !roleName) {
 			throw new Error("username, host and roleName cannot be empty");
 		}
@@ -60,7 +60,7 @@ class Role {
      * @param {String} tableName
      * @returns {String}
      */    
-	revokeRole(username, host, roleName) {	
+	removeRoleFromUser(username, host, roleName) {	
 		if (!username || !host || !roleName) {
 			throw new Error("username, host and roleName cannot be empty");
 		}

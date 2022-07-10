@@ -50,12 +50,12 @@ describe("Role.js", () => {
 
 	});
 	
-	describe("grantRole", () => {
+	describe("addRoleToUser", () => {
 		
 		it("given a username, host and role name when executing the grantRole method then it must create a correct statement", () => {
 			const role = new Role();
 
-			const statement = role.grantRole(username, host, roleName);
+			const statement = role.addRoleToUser(username, host, roleName);
 
 			expect(statement)
 				.to.eql(`GRANT ${roleName} TO ${username}@${host};`);
@@ -65,12 +65,12 @@ describe("Role.js", () => {
 
 	});
 
-	describe("revokeRole", () => {
+	describe("removeRoleFromUser", () => {
 		
 		it("given a username, host and role name when executing the revokeRole method then it must create a correct statement", () => {
 			const role = new Role();
 
-			const statement = role.revokeRole(username, host, roleName);
+			const statement = role.removeRoleFromUser(username, host, roleName);
 
 			expect(statement)
 				.to.eql(`REVOKE ${roleName} FROM ${username}@${host};`);
