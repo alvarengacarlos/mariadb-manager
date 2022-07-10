@@ -59,8 +59,36 @@ class AccountManagement {
 		return `RENAME USER ${oldUsername}@${oldHost} TO ${newUsername}@${newHost};`;
 	}
 	
-	createRole() {}
-	dropRole() {}
+	/**
+	 * 
+	 * @param {String} roleName 
+	 * @param {String} adminUserOfRole 
+	 * @param {String} roleAdminUserHost 
+	 * @returns 
+	 */
+	createRole(roleName, adminUserOfRole, roleAdminUserHost) {
+		if (!roleName) {
+			throw new Error("roleName cannot be empty");
+		}
+		
+		if (adminUserOfRole && !roleAdminUserHost || roleAdminUserHost && !adminUserOfRole) {
+			throw new Error("adminUserOfRole and roleAdminUserHost must be set together");
+		}
+		
+		if (adminUserOfRole && roleAdminUserHost) {
+			return `CREATE ROLE IF NOT EXISTS ${roleName} WITH ADMIN ${adminUserOfRole}@${roleAdminUserHost}`
+		}
+
+		return `CREATE ROLE IF NOT EXISTS ${roleName};`
+	}
+
+	dropRole(roleName) {
+		if (!roleName) {
+			throw new Error("roleName cannot be empty");
+		}
+
+		return `DROP ROLE ${roleName};`;
+	}
 }
 
 module.exports = AccountManagement;
