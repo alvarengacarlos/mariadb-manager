@@ -1,4 +1,4 @@
-class AccountManagement {
+class Account {
     
 	/**
      * 
@@ -61,4 +61,4 @@ class AccountManagement {
 	
 }
 
-module.exports = AccountManagement;
+module.exports = Account;
